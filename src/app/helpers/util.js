@@ -1,10 +1,16 @@
 import multer from "multer";
 import path from "path";
+import fs from "fs";
+const dir = '';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+        if (!fs.existsSync("./uploads")){
+            fs.mkdirSync("./uploads");
+        }
         cb(null, 'uploads');
     },
+
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
     }
