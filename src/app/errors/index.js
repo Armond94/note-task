@@ -4,6 +4,8 @@ import {
     UNAUTHORIZED_CODE,
 } from '../configs/status-codes';
 
+import { SOMETHING_WENT_WRONG } from "../configs/constants";
+
 export class BadRequest extends Error {
     status = BAD_REQUEST_CODE;
     message;

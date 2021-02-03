@@ -2,7 +2,7 @@ export default (mongoose) => {
     let NoteSchema = mongoose.Schema({
         title: { type: String, required: true },
         content: { type: String, required: true },
-        labels: [{ type: String, required: true }],
+        labels: [{ type: String }],
         images: [ { type: String } ],
         owner: { type: mongoose.Schema.Types.ObjectId },
         createdAt: Date,

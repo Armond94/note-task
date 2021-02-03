@@ -66,6 +66,12 @@ export class NoteController {
     static async uploadImage (req, res, next) {
         try {
             const _id = req.params.id;
+            const note = await NoteService.getOneByQuery({ _id, owner: req.user.id });
+
+            if (!note) {
+                throw new NotFound(NOT_FOUND);
+            }
+
             await NoteService.updateNote({ _id, owner: req.user.id },{ $addToSet: { images: req.file.filename }});
 
             return res.status(SUCCESS_CODE).json({ message: req.file.path });
@@ -78,6 +84,11 @@ export class NoteController {
         try {
             const _id = req.params.id;
             const note = await NoteService.getOneByQuery({ _id, owner: req.user.id });
+
+            if (!note) {
+                throw new NotFound(NOT_FOUND);
+            }
+
             const fileName = note.images.find(image => image === req.query.fileName);
 
             return res.sendFile(path.join(__dirname, FILE_UPLOAD_PATH + fileName));
