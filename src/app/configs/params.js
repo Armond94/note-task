@@ -5,9 +5,6 @@ import {
 const params = {
     development: {
         apiPort
-    },
-    production: {
-        apiPort,
     }
 };
 
